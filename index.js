@@ -7,11 +7,16 @@ const app = express();
 
 app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
-  return res.send('Received a GET HTTP method');
+app.get('/checkhealth', (req, res) => {
+  return res.send('up and running');
 });
 
-app.post('/', (req, res) => {
+app.post('/object', (req, res) => {
+	console.log(`adding ${JSON.parse(req.body)}`)
+	//create timestamp
+	//check if key exists
+	//save object or append to existing, with timestamp
+	//return said object
   return res.send('Received a POST HTTP method');
 });
 
