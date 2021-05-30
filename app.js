@@ -4,8 +4,6 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import ObjectSchema from "./model.js";
 import parseErrors from "./parseError.js";
-const isDev = process.env.NODE_ENV !== "production";
-const PORT = process.env.PORT || 5000;
 
 // should probably use env variable for this
 const dbUrl =
@@ -87,6 +85,7 @@ app.post("/object", (req, res) => {
         );
 });
 
-app.listen(PORT, () =>
-    console.log(`listening on port ${PORT}`)
-);
+//app.listen(PORT, () =>
+//console.log(`listening on port ${PORT}`)
+//);
+export default app
