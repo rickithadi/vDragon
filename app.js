@@ -22,6 +22,10 @@ app.use(
     })
 );
 
+app.get("/", (req, res) => {
+    res.send('up and running')
+})
+
 app.get("/object/:key/:timestamp?", (req, res) => {
     //check timestamp is provided and valid
     if (req.query.timestamp) {
