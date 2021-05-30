@@ -1,18 +1,13 @@
 {
+    "type": "module",
     "name": "vdragon",
     "version": "1.0.0",
     "description": "node api with mongo",
-    "main": "index.js",
-    "type": "module",
+    "main": "server.js",
     "scripts": {
-        "test": "jest",
-        "start": "nodemon server.js"
-    },
-    "jest": {
-        "testEnvironment": "node",
-        "coveragePathIgnorePatterns": [
-            "/node_modules/"
-        ]
+        "start": "nodemon server.js",
+        "test": "jest ",
+        "test:watch": "npm run test -- --watch"
     },
     "author": "hadi rickit",
     "license": "ISC",
@@ -24,6 +19,8 @@
         "mongoose": "^5.12.12"
     },
     "devDependencies": {
+        "@babel/preset-env": "^7.14.4",
+        "babel-jest": "^27.0.2",
         "jest": "^27.0.3",
         "supertest": "^6.1.3"
     }
