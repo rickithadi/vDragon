@@ -1,11 +1,20 @@
 import express from 'express';
+import cors from 'cors'
+import bodyParser from 'body-parser'
 
 const isDev = process.env.NODE_ENV !== 'production';
 const PORT = process.env.PORT || 5000;
 
 const app = express();
 
+app.use(cors());
 app.use(bodyParser.json());
+
+
+app.get('/', (req, res) => {
+  return res.send('up and running');
+});
+
 
 app.get('/checkhealth', (req, res) => {
   return res.send('up and running');
@@ -28,11 +37,5 @@ app.delete('/', (req, res) => {
   return res.send('Received a DELETE HTTP method');
 });
 
-app.listen(PORT, function() {
-  console.error(
-    `Node ${
-      isDev ? 'dev server' : 'cluster worker ' + process.pid
-    }: listening on port ${PORT}`,
-  );
-  //console.error(`Node istening on port ${PORT}`);
-});
+
+app.listen(PORT, () => console.log(`Hello world app listening on port ${PORT}!`));
