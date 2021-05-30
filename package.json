@@ -6,7 +6,8 @@
     "version": "1.0.0",
     "description": "node api with mongo",
     "scripts": {
-        "start": "nodemon server.js",
+        "start": "node server.js",
+        "start:dev": "nodemon server.js",
         "test": "jest",
         "test:watch": "npm run test -- --watch"
     },
