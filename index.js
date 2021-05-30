@@ -27,31 +27,40 @@ app.use(
 app.get("/object/:key/:timestamp?", (req, res) => {
     //check timestamp is provided and valid
     if (req.query.timestamp) {
-
-        const date = Date(req.query.timestamp)
+        //https://www.delftstack.com/howto/javascript/javascript-convert-timestamp-to-date/
+        const parseDate = new Date(req.query.timestamp * 1000)
+        console.log('before', parseDate)
         ObjectSchema.find({
                 timestamp: {
-                    $lte: date
-                }
+                    $lte: parseDate
+                },
+                key: req.params.key,
             })
             .sort({
-                '_id': -1
-            }).limit(1).then(data => res.json({
+                "timestamp": -1
+            })
+            .then(data => res.send({
                 data
+                //[data[0].key]: data[0].value
             }))
             .catch(err => res.status(400).json({
-                errors: parseErrors(err.errors)
+                err
             }));
 
     } else {
         //look for object with corresponding key and return latest
-        ObjectSchema.find({
+        ObjectSchema.findOne({
                 key: req.params.key
+            }, {
+                _id: 0
             }).sort({
                 '_id': -1
-            }).limit(1).then(data => res.json({
-                data
-            }))
+            }).then(data =>
+
+                res.send({
+                    [data.key]: data.value
+                })
+            )
             .catch(err => res.status(400).json({
                 errors: parseErrors(err.errors)
             }));
@@ -66,9 +75,9 @@ app.post("/object", (req, res) => {
             value: req.body[key],
             key
         })
-        .then((object) => res.json({
+        .then((object) => res.json(
             object
-        }))
+        ))
         .catch((err) =>
             res
             .status(400)

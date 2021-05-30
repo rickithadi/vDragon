@@ -11,12 +11,10 @@ const schema = new mongoose.Schema({
     },
     timestamp: {
         type: Date,
-        default: Date.now,
+        default: new Date(),
         required: false
     }
 
-}, {
-    _id: false
 }, {
     // hide _v
     versionKey: false
