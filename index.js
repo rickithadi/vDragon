@@ -25,11 +25,12 @@ app.use(
 );
 
 app.get("/object/:key/:timestamp?", (req, res) => {
-    const date = Date(req.query.timestamp)
     //check timestamp is provided and valid
-    if (date) {
+    if (req.query.timestamp) {
+
+        const date = Date(req.query.timestamp)
         ObjectSchema.find({
-                createdAt: {
+                timestamp: {
                     $lte: date
                 }
             })
