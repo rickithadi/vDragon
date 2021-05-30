@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors'
 import bodyParser from 'body-parser'
 import mongoose from 'mongoose';
-
+import ObjectSchema from './model.js'
 const isDev = process.env.NODE_ENV !== 'production';
 const PORT = process.env.PORT || 5000;
 
@@ -28,10 +28,12 @@ app.get('/keys', (req, res) => {
 
 
 app.post('/object', (req, res) => {
-	console.log('saving',req.body)
-	//create timestamp
-	//check if key exists
-	//save object or append to existing, with timestamp
+	//create object from schema and insert
+let key=	Object.keys(req.body)[0]
+	ObjectSchema.create({value:req.body[key],key})
+	 //   .then(object => res.json({object}))
+	    //.catch(err => res.status(400).json({err}));
+
 	//return said object
   return res.send('Received a POST HTTP method');
 });
