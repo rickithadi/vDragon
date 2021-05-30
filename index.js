@@ -35,13 +35,14 @@ app.get("/object/:key/:timestamp?", (req, res) => {
                     $lte: parseDate
                 },
                 key: req.params.key,
+            }, {
+                _id: 0
             })
             .sort({
                 "timestamp": -1
             })
             .then(data => res.send({
-                data
-                //[data[0].key]: data[0].value
+                [data[0].key]: data[0].value
             }))
             .catch(err => res.status(400).json({
                 err
@@ -56,7 +57,6 @@ app.get("/object/:key/:timestamp?", (req, res) => {
             }).sort({
                 '_id': -1
             }).then(data =>
-
                 res.send({
                     [data.key]: data.value
                 })
