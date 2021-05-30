@@ -73,7 +73,7 @@ app.post("/object", (req, res) => {
             value: req.body[key],
             key
         })
-        .then((object) => res.json(
+        .then((object) => res.status(200).json(
             object
         ))
         .catch((err) =>
