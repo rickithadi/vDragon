@@ -8,29 +8,32 @@ const PORT = process.env.PORT || 5000;
 const app = express();
 
 app.use(cors());
-app.use(bodyParser.json());
 
-
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+function allKeys() {
+    return [
+        {id: 1, name: "Finish writing a blogpost"},
+        {id: 2, name: "Make chickpea curry for dinner"},
+        {id: 3, name: "Wake up at 5:30am"},
+    ];
+}
 app.get('/', (req, res) => {
   return res.send('up and running');
 });
-
-
-app.get('/checkhealth', (req, res) => {
-  return res.send('up and running');
+app.get('/keys', (req, res) => {
+  return res.send(allKeys());
 });
 
+
 app.post('/object', (req, res) => {
-	console.log(`adding ${JSON.parse(req.body)}`)
+	console.log('saving',req.body)
 	//create timestamp
 	//check if key exists
 	//save object or append to existing, with timestamp
 	//return said object
   return res.send('Received a POST HTTP method');
-});
-
-app.put('/', (req, res) => {
-  return res.send('Received a PUT HTTP method');
 });
 
 app.delete('/', (req, res) => {
